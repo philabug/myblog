@@ -3,11 +3,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-admin.site.site_header = "philabug"
-admin.site.site_title = "philabug"
-admin.site.index_title = "Welcom to admin page"
+admin.site.site_header = "Abug's Admin"
+admin.site.site_title = "Abug"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('blog.urls')),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
