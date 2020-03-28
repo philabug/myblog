@@ -7,18 +7,45 @@
         <h2 class="mt-4">{{ post.title }}</h2>
 
         <!-- Author, Date/Time, Category-->
-        <p style="color:gray;font-size:14px">{{ post.pub_date|date:"F j, Y" }} &#8226; {{ post.author }} &#8226; {{ blog.category }}</p>
+        <!-- Author, Date/Time, Category-->
+        <p style="color:gray;font-size:12px">
+            <span title="Date Posted">
+                <i class="far fa-hourglass"></i> &nbsp; {{ post.pub_date|date:"F j, Y" }}  &nbsp; &#8226;  &nbsp;
+            </span>
+            <span title="Post By : {{ post.author }}">
+                <i class="fas fa-user-secret"></i> &nbsp;{{ post.author }} &nbsp; &#8226;  &nbsp;
+            </span>
+            <span title="Category">
+                <i class="fas fa-project-diagram"></i> &nbsp; {{ post.category }}
+            </span>
+        </p>
 
         <!-- Preview Image -->
         <img class="img-fluid rounded" src="{{ post.banner.url }}" alt="">
         <br/><br/>
+
         <!-- Post Content -->
-        <p>{{ post.content}}</p>
+        <p>{{ post.content|safe}}</p>
+
+        <!-- More Contents -->
+        {% for contents in post_contents %}
+            <h4>{{ contents.header}}</h4>
+            
+            <p>{{ contents.content|safe}}</p>
+
+            {{ contents.codes | safe }}
+               
+            
+            
+            
+
+        {% endfor %}
+        
 
        
         <br/><br/>
         <hr/>
-
+        
     
     </div>
 {% endblock %}

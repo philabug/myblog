@@ -6,16 +6,26 @@
 <div class="col-lg-8">
     {% for blog in blogs %}
         <!-- Title -->
-        <h2 class="mt-4"><a class="post-title" href="{% url 'blog:post' blog.slug %}">{{ blog.title }}</a></h2>
+        <h2 class="mt-4" title="{{ blog.title }}"><a class="post-title" href="{% url 'blog:post' blog.slug %}">{{ blog.title }}</a></h2>
 
         <!-- Author, Date/Time, Category-->
-        <p style="color:gray;font-size:14px">{{ blog.pub_date|date:"F j, Y" }} &#8226; {{ blog.author }} &#8226; {{ blog.category }}</p>
+        <p style="color:gray;font-size:12px">
+            <span title="Date Posted">
+                <i class="far fa-hourglass"></i> &nbsp; {{ blog.pub_date|date:"F j, Y" }}  &nbsp; &#8226;  &nbsp;
+            </span>
+            <span title="Post By : {{ blog.author }}">
+                <i class="fas fa-user-secret"></i> &nbsp;{{ blog.author }} &nbsp; &#8226;  &nbsp;
+            </span>
+            <span title="Category">
+                <i class="fas fa-project-diagram"></i> &nbsp; {{ blog.category }}
+            </span>
+        </p>
 
         <!-- Preview Image -->
         <img class="img-fluid rounded" src="{{ blog.banner.url }}" alt="">
         <br/><br/>
         <!-- Post Content -->
-        <p>{{ blog.content|truncatewords:30 }}</p>
+        <p>{{ blog.content|truncatewords:25 | safe }}</p>
 
         <button type="button" class="btn btn-outline-primary" onclick="location.href='{% url 'blog:post' blog.slug %}';">Read More</button>
     
@@ -36,6 +46,8 @@
             </ul>
         </nav>
     {% endif %}
+
+    
 
 </div>
     {% comment %} <!-- Post Content Column -->

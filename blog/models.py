@@ -5,6 +5,8 @@ from taggit.managers import TaggableManager
 from django.db.models.signals import pre_save
 from philabug.utils import unique_slug_generator
 
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Blog(models.Model):
     id = models.AutoField(primary_key=True)
@@ -15,7 +17,7 @@ class Blog(models.Model):
     tags = TaggableManager()
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True )
     last_modified = models.DateTimeField(auto_now=True)
-    content = models.TextField()
+    content = RichTextUploadingField(null=True, blank=True)
 
     slug = models.SlugField(max_length=250, null=True, blank=True)
 
@@ -36,8 +38,8 @@ class MoreContent(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     header = models.CharField(max_length=255, blank=True)
     images = models.ImageField(upload_to='', max_length=255, blank=True)
-    content = models.TextField()
-    codes = models.TextField(blank=True)
+    content = RichTextField(null=True, blank=True)
+    codes = RichTextField(null=True, blank=True, config_name='special')
 
     def __str__(self):
         return self.blog.title
