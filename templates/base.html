@@ -35,6 +35,9 @@
   <!--font-awesome-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
 
+  <!--google font api-->
+  <link href="https://fonts.googleapis.com/css?family=Poller+One&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -42,20 +45,26 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-white bg-white sticky-top border-bottom">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'blog:home' %}">PhilTech Guru</a>
+      <a class="navbar-brand" href="{% url 'blog:home' %}" style="color:#A93226; font-family: 'Poller One', cursive;font-size:25px">How to do it?</a>
       <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
      
       <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
+        <!--search box-->
+        <div class="form-group has-search" style="margin-bottom:0px">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" class="form-control" placeholder="Search content ...">
+        </div>
+
+        <ul class="navbar-nav ml-auto" style="color:#A93226 !important">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="{% url 'blog:home' %}">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="{% url 'blog:about-me' %}">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
@@ -76,61 +85,8 @@
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
-          <div class="sticky">
-            <!--SidePanel-->
-            <div style="padding-top:80px; border-left: 1px solid #dee2e6; padding-top:70px; padding-right: 25px; padding-left: 25px;">
-                
-                <!--search box-->
-                <div class="form-group has-search">
-                    <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" class="form-control" placeholder="Search content ...">
-                </div>
-                <br/>
-                <!--Categories-->
-                <strong>Categories</strong>
-                <br/><br/>  
-                <div class="row">
-                    <div class="col-lg-6">
-                      <ul class="list-unstyled mb-0">
-                        <li>
-                          <a href="#">Web Design</a>
-                        </li>
-                        <li>
-                          <a href="#">HTML</a>
-                        </li>
-                        <li>
-                          <a href="#">Freebies</a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="col-lg-6">
-                      <ul class="list-unstyled mb-0">
-                        <li>
-                          <a href="#">JavaScript</a>
-                        </li>
-                        <li>
-                          <a href="#">CSS</a>
-                        </li>
-                        <li>
-                          <a href="#">Tutorials</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <!--Sidewidgets-->
-                  <br/><br/>
-                  <strong>Side Widgets</strong>
-                  <br/><br/> 
-                  {% lorem 1 b random %}
-
-            </div>
-            <!--end SidePanel-->
-              
-
-            
-            {% comment %} <!-- Search Widget -->
-            <div class="card my-4 sticky">
+           {% comment %} <!-- Search Widget -->
+            <div class="card my-4">
               <h5 class="card-header">Search</h5>
               <div class="card-body">
                 <div class="input-group">
@@ -140,10 +96,10 @@
                   </span>
                 </div>
               </div>
-            </div>
+            </div> {% endcomment %}
 
             <!-- Categories Widget -->
-            <div class="card my-4 sticky">
+            <div class="card my-4">
               <h5 class="card-header">Categories</h5>
               <div class="card-body">
                 <div class="row">
@@ -184,9 +140,8 @@
                 You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
                 {% lorem 1 b random %}
               </div>
-            </div> {% endcomment %}
+            </div> 
 
-          </div>
         </div>
 
       </div>

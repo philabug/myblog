@@ -40,3 +40,9 @@ def post(request, slug):
         'post_contents' : more_contents,
     } 
     return render(request, 'blog/post.html', context)
+
+def about_me(request):
+    context = {
+        'post_title' : 'About Me'
+    }
+    return render(request, 'blog/aboutme.html', context)
