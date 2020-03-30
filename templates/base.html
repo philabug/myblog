@@ -11,6 +11,9 @@
 
   <title>{{ post_title }}</title>
 
+  <!--google ajax cdn-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+
   <!-- Bootstrap core CSS -->
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %} " rel="stylesheet">
 
@@ -43,8 +46,8 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-white bg-white sticky-top border-bottom">
-    <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-white bg-white sticky-top">
+    <div class="container border-bottom pb-2">
       <a class="navbar-brand" href="{% url 'blog:home' %}" style="color:#A93226; font-family: 'Poller One', cursive;font-size:25px">How to do it?</a>
       <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -52,9 +55,17 @@
      
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <!--search box-->
-        <div class="form-group has-search" style="margin-bottom:0px">
+        <div class="form-group has-search">
             <span class="fa fa-search form-control-feedback"></span>
-            <input type="text" class="form-control" placeholder="Search content ...">
+            <input type="text" class="form-control" list="search" name="search" id="search" placeholder="Search content ...">
+            
+            <ul class="form-group list-group result" id="result"></ul>
+            {% comment %} <datalist id="search">
+              {% for data in all_content %}
+                <option value="{{ data.title }}">
+              {% endfor %}
+            </datalist > {% endcomment %}
+
         </div>
 
         <ul class="navbar-nav ml-auto" style="color:#A93226 !important">
@@ -176,6 +187,39 @@
         });
 
         codecopy('pre') // your code tag selector!
+        
+        //dump json search content
+        search_content = {{ all_content | safe }}
+        //start: filtering
+        $('#search').keyup(function(){
+          
+          $('#result').html('');
+          var searchField = $('#search').val();
+          try{
+              var expression = new RegExp(searchField, "i");
+          }catch(e){
+              return false;
+          }
+          var expression = new RegExp(searchField, "i");
+          
+          if (searchField != '' || searchField != 0 ){
+              $.each(search_content, function(key, value){
+              if(value.title.search(expression) != -1 || value.category.search(expression) != -1)
+              {
+                $('#result').append('<li class="list-group-item" id='+ value.id +'><a href="#">'+ value.title +'</a></li>');
+              }
+            })
+          }
+        })
+        //end:filtering
+
+        $('#result').on('click', 'li', function() {
+          {% comment %} var click_text = $(this).text().split('|');
+          $('#search').val($.trim(click_text[0]));
+          $("#result").html(''); {% endcomment %}
+          alert('searching')
+        });
+
     });
     
   </script>

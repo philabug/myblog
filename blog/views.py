@@ -1,8 +1,13 @@
+import json
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Blog, MoreContent
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.paginator import Paginator
+
+def search_content(request):
+    all_content = list(Blog.objects.all().values('id','title','category').order_by('-id'))
+    return ({'all_content': json.dumps(all_content) } )
 
 
 def home(request):
