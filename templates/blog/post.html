@@ -15,8 +15,11 @@
             <span title="Post By : {{ post.author }}">
                 <i class="fas fa-user-secret"></i> &nbsp;{{ post.author }} &nbsp; &#8226;  &nbsp;
             </span>
-            <span title="Category">
-                <i class="fas fa-project-diagram"></i> &nbsp; {{ post.category }}
+            <span title="Comment">
+                <i class="far fa-comment-alt"></i> &nbsp; 5 comments &nbsp; &nbsp;
+            </span>
+            <span title="Views">
+                <i class="far fa-eye"></i> &nbsp; 18,899 views
             </span>
         </p>
 
@@ -48,4 +51,13 @@
         
     
     </div>
+
+<script>
+    $(document).ready(function(){
+        $('#homebanner').remove();
+    })
+
+</script>
+
+
 {% endblock %}

@@ -11,13 +11,17 @@
         <!-- Author, Date/Time, Category-->
         <p style="color:gray;font-size:12px">
             <span title="Date Posted">
-                <i class="far fa-hourglass"></i> &nbsp; {{ blog.pub_date|date:"F j, Y" }}  &nbsp; &#8226;  &nbsp;
+                <i class="far fa-hourglass"></i> &nbsp; {{ blog.pub_date|date:"F j, Y" }}  &nbsp;   &nbsp;
             </span>
             <span title="Post By : {{ blog.author }}">
-                <i class="fas fa-user-secret"></i> &nbsp;{{ blog.author }} &nbsp; &#8226;  &nbsp;
+                <i class="fas fa-user-secret"></i> &nbsp;{{ blog.author }} &nbsp; &nbsp;
             </span>
-            <span title="Category">
-                <i class="fas fa-project-diagram"></i> &nbsp; {{ blog.category }}
+            
+            <span title="Comment">
+                <i class="far fa-comment-alt"></i> &nbsp; 5 comments &nbsp; &nbsp;
+            </span>
+            <span title="Views">
+                <i class="far fa-eye"></i> &nbsp; 18,899 views
             </span>
         </p>
 

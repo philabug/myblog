@@ -39,16 +39,27 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
 
   <!--google font api-->
-  <link href="https://fonts.googleapis.com/css?family=Poller+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
   <!-- Navigation -->
+  {% comment %} <div class="container" id="follow">
+    <ul>
+      <li style="float:left;font-family:lucida">Welcome to how it works</li>
+      <li><a href="#" target="_blank" title="github"><i class="fab fa-github-alt"></i></a></li>
+      <li><a href="#" target="_blank" title="youtube"><i class="fab fa-youtube" style="color:red"></i></a></li>
+    </ul>
+
+  </div> {% endcomment %}
+
   <nav class="navbar navbar-expand-lg navbar-white bg-white sticky-top">
-    <div class="container border-bottom pb-2">
-      <a class="navbar-brand" href="{% url 'blog:home' %}" style="color:#A93226; font-family: 'Poller One', cursive;font-size:25px">How to do it?</a>
+    
+
+    <div class="container pb-2 one-edge-shadow">
+      <a class="navbar-brand" href="{% url 'blog:home' %}" style="color:#A93226; font-family: 'Titillium Web', sans-serif; font-size:25px">< How to do it? /></a>
       <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -88,8 +99,24 @@
     </div>
   </nav>
 
+  <!-- Home bannet Content -->
+  <div class="container" id="homebanner">
+    <div class="row pt-5 pb-5 border-bottom">
+        <div class="col-md-12">
+          <center>
+          <h3 class="title">
+              How to do it? <br/> It's a community for coders intendend to learn or share their knowledge for others.
+          </h3>
+          <p class="qoute">"Power comes not from knowledge kept, but from knowledge shared." - Bill Gates</p>
+          </center>
+        </div>
+    </div>
+  </div>
+
   <!-- Page Content -->
   <div class="container">
+    
+
     <div class="row">
       {% block content %}					
       {% endblock %}
@@ -214,9 +241,9 @@
         //end:filtering
 
         $('#result').on('click', 'li', function() {
-          {% comment %} var click_text = $(this).text().split('|');
+          var click_text = $(this).text().split('|');
           $('#search').val($.trim(click_text[0]));
-          $("#result").html(''); {% endcomment %}
+          $("#result").html('');
           alert('searching')
         });
 
