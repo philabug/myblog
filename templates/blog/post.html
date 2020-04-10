@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load humanize %}
+{% load hitcount_tags %}
 
 {% block content %}	
     <div class="col-lg-8">
@@ -19,7 +20,7 @@
                 <i class="far fa-comment-alt"></i> &nbsp; 5 comments &nbsp; &nbsp;
             </span>
             <span title="Views">
-                <i class="far fa-eye"></i> &nbsp; 18,899 views
+                <i class="far fa-eye"></i> &nbsp; {% get_hit_count for post %} views
             </span>
         </p>
 

@@ -9,7 +9,10 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>{{ post_title }}</title>
+  <title>
+    {% block title %} {{ post.title|default_if_none:"-" }} - How To Do It?{% endblock %}
+    
+  </title>
 
   <!--google ajax cdn-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
@@ -59,33 +62,49 @@
     
 
     <div class="container pb-2 one-edge-shadow">
-      <a class="navbar-brand" href="{% url 'blog:home' %}" style="color:#A93226; font-family: 'Titillium Web', sans-serif; font-size:25px">< How to do it? /></a>
+      <a class="navbar-brand" href="{% url 'blog:posts' %}" style="color:#A93226; font-family: 'Titillium Web', sans-serif; font-size:25px">< How To Do It? /></a>
       <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
      
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <!--search box-->
-        <div class="form-group has-search">
+        {% comment %} <div class="form-group has-search">
             <span class="fa fa-search form-control-feedback"></span>
             <input type="text" class="form-control" list="search" name="search" id="search" placeholder="Search content ...">
             
             <ul class="form-group list-group result" id="result"></ul>
-            {% comment %} <datalist id="search">
-              {% for data in all_content %}
-                <option value="{{ data.title }}">
-              {% endfor %}
-            </datalist > {% endcomment %}
 
-        </div>
+        </div> {% endcomment %}
+
+        {% comment %} <div class="input-group">
+          <input type="text" class="form-control" id="search" placeholder="Search contents..." aria-describedby="search-button">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="search-button"><i class="fa fa-search"></i></button>
+          </div>
+          
+          <ul class="form-group list-group xresult" id="result"></ul>
+        </div> {% endcomment %}
+
+        <div id="custom-search-input">
+						<div class="input-group">
+							<input type="text" class="form-control" id="search" placeholder="Search contents..." aria-describedby="search-button">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="search-button"><i class="fa fa-search"></i></button>
+              </div>
+						</div>
+						<ul class="form-group list-group result" id="result"></ul>
+					</div>
 
         <ul class="navbar-nav ml-auto" style="color:#A93226 !important">
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'blog:home' %}">Home
+            {% comment %} <a class="nav-link" href="{% url 'blog:home' %}">Home {% endcomment %}
+            <a class="nav-link" href="">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
+            {% comment %} <a class="nav-link" href="{% url 'blog:about-me' %}">About</a> {% endcomment %}
             <a class="nav-link" href="{% url 'blog:about-me' %}">About</a>
           </li>
           <li class="nav-item">
@@ -123,18 +142,14 @@
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
-           {% comment %} <!-- Search Widget -->
+           <!-- Search Widget -->
             <div class="card my-4">
-              <h5 class="card-header">Search</h5>
+              <h5 class="card-header">Most or like tutorial rating</h5>
               <div class="card-body">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
-                  <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button">Go!</button>
-                  </span>
-                </div>
+                  <p> tutorial 1 | rating</p>
+                  <p> tutorial 2 | rating</p>
               </div>
-            </div> {% endcomment %}
+            </div>
 
             <!-- Categories Widget -->
             <div class="card my-4">

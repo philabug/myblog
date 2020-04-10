@@ -1,55 +1,61 @@
 {% extends 'base.html' %}
 {% load humanize %}
+{% load hitcount_tags %}
+
+{% block title %}How To Do It?{% endblock %}
 
 {% block content %}	
 
 <div class="col-lg-8">
-    {% for blog in blogs %}
+    {% for post in posts %}
+        
+      
         <!-- Title -->
-        <h2 class="mt-4" title="{{ blog.title }}"><a class="post-title" href="{% url 'blog:post' blog.slug %}">{{ blog.title }}</a></h2>
+        <h2 class="mt-4" title="{{ post.title }}"><a class="post-title" href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a></h2>
 
         <!-- Author, Date/Time, Category-->
         <p style="color:gray;font-size:12px">
             <span title="Date Posted">
-                <i class="far fa-hourglass"></i> &nbsp; {{ blog.pub_date|date:"F j, Y" }}  &nbsp;   &nbsp;
+                <i class="far fa-hourglass"></i> &nbsp; {{ post.pub_date|date:"F j, Y" }}  &nbsp;   &nbsp;
             </span>
-            <span title="Post By : {{ blog.author }}">
-                <i class="fas fa-user-secret"></i> &nbsp;{{ blog.author }} &nbsp; &nbsp;
+            <span title="Post By : {{ post.author }}">
+                <i class="fas fa-user-secret"></i> &nbsp;{{ post.author }} &nbsp; &nbsp;
             </span>
             
             <span title="Comment">
                 <i class="far fa-comment-alt"></i> &nbsp; 5 comments &nbsp; &nbsp;
             </span>
             <span title="Views">
-                <i class="far fa-eye"></i> &nbsp; 18,899 views
+                <i class="far fa-eye"></i> &nbsp; {% get_hit_count for post %} views
             </span>
         </p>
 
         <!-- Preview Image -->
-        <img class="img-fluid rounded" src="{{ blog.banner.url }}" alt="">
+        <img class="img-fluid rounded" src="{{ post.banner.url }}" alt="">
         <br/><br/>
         <!-- Post Content -->
-        <p>{{ blog.content|truncatewords:25 | safe }}</p>
+        <p>{{ post.content|truncatewords:25 | safe }}</p>
 
-        <button type="button" class="btn btn-outline-primary" onclick="location.href='{% url 'blog:post' blog.slug %}';">Read More</button>
+        <button type="button" class="btn btn-outline-primary" onclick="location.href='{% url 'blog:detail' post.slug %}';">Read More</button>
     
         <br/><br/>
         <hr/>
 
     {% endfor %}
     <br/>
-    {% if blogs.has_other_pages %}
+    
+    {% if is_paginated %}
         <nav aria-label="Page navigation conatiner"></nav>
             <ul class="pagination">
-                {% if blogs.has_previous %}
-                    <li><a href="?page={{ blogs.previous_page_number }}" class="page-link"><strong>&laquo; PREV </strong></a></li>
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link"><strong>&laquo; PREV </strong></a></li>
                 {% endif %}
-                {% if blogs.has_next %}
-                    <li><a href="?page={{ blogs.next_page_number }}" class="page-link"><strong> NEXT &raquo; </strong></a></li>
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"><strong> NEXT &raquo; </strong></a></li>
             {% endif %}
             </ul>
         </nav>
-    {% endif %}
+    {% endif %} 
 
     
 

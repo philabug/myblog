@@ -8,6 +8,11 @@ from philabug.utils import unique_slug_generator
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
+from hitcount.models import HitCountMixin, HitCount
+from django.contrib.contenttypes.fields import GenericRelation
+from django.utils.encoding import python_2_unicode_compatible
+
+@python_2_unicode_compatible
 class Blog(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
@@ -20,6 +25,7 @@ class Blog(models.Model):
     content = RichTextUploadingField(null=True, blank=True)
 
     slug = models.SlugField(max_length=250, null=True, blank=True)
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')
 
     class Meta:
         ordering = ['id']
